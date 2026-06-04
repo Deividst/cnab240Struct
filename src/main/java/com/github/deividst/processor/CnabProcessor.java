@@ -179,6 +179,7 @@ public class CnabProcessor extends AbstractProcessor {
         int start = annotation.start();
         int end = annotation.end();
         FieldType fieldType = annotation.type();
+        String defaultValue = annotation.defaultValue();
 
         String fieldName = field.getSimpleName().toString();
         String getter = buildGetter(fieldName);
@@ -186,7 +187,7 @@ public class CnabProcessor extends AbstractProcessor {
         writer.write(
                 "      .add(\"" + fieldName + "\", " +
                         start + ", " +
-                        end + ", obj." + getter + "(), FieldType." + fieldType + ")\n"
+                        end + ", obj." + getter + "(), FieldType." + fieldType + ", \""+ defaultValue + "\")\n"
         );
     }
 

@@ -2,6 +2,7 @@ package com.github.deividst.linebuilder;
 
 import com.github.deividst.enums.FieldType;
 import com.github.deividst.exceptions.ContentFieldExceedsSizeLimitException;
+import com.github.deividst.exceptions.ValueFieldRequiredException;
 
 import java.util.Arrays;
 
@@ -37,8 +38,16 @@ public class CnabLineBuilder {
      *     </li>
      * </ul>
      */
-    public CnabLineBuilder add(String fieldName, int start, int end, String value, FieldType fieldType) {
+    public CnabLineBuilder add(String fieldName, int start, int end, String value, FieldType fieldType, String defaultValue) {
         int size = end - start + 1;
+
+        if (value == null && defaultValue != null) {
+            value = defaultValue;
+        }
+
+        if (value == null) {
+            throw new ValueFieldRequiredException("The value of a field [" + value + "] with no default value cannot be null.");
+        }
 
         if (value.length() > size) {
             throw new ContentFieldExceedsSizeLimitException("The content [" + value + "] of the field [" + fieldName + "] exceeds the size [" + size + "] limit.");

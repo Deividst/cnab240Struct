@@ -39,9 +39,9 @@ class CnabProcessorTest {
                                 
                                   public static String write(Example obj) {
                                     return new CnabLineBuilder()
-                                      .add("bank",1, 3, obj.getBank(), FieldType.ALPHANUMERIC)
-                                      .add("agency",4, 7, obj.getAgency(), FieldType.ALPHANUMERIC)
-                                      .add("account",8, 19, obj.getAccount(), FieldType.NUMERIC)
+                                      .add("bank",1, 3, obj.getBank(), FieldType.ALPHANUMERIC, " ")
+                                      .add("agency",4, 7, obj.getAgency(), FieldType.ALPHANUMERIC, " ")
+                                      .add("account",8, 19, obj.getAccount(), FieldType.NUMERIC, "0")
                                       .build();
                                   }
                                 
@@ -82,6 +82,8 @@ class CnabProcessorTest {
                             int end();
                         
                             FieldType type() default FieldType.ALPHANUMERIC;
+                        
+                            String defaultValue();
                         }
                         """);
     }
@@ -110,13 +112,13 @@ class CnabProcessorTest {
     
                 public class Example {
     
-                   @CnabField(start = 1, end = 3, type = FieldType.ALPHANUMERIC)
+                   @CnabField(start = 1, end = 3, type = FieldType.ALPHANUMERIC, defaultValue = " ")
                    private String bank;
                 
-                   @CnabField(start = 4, end = 7, type = FieldType.ALPHANUMERIC)
+                   @CnabField(start = 4, end = 7, type = FieldType.ALPHANUMERIC, defaultValue = " ")
                    private String agency;
                 
-                   @CnabField(start = 8, end = 19, type = FieldType.NUMERIC)
+                   @CnabField(start = 8, end = 19, type = FieldType.NUMERIC, defaultValue = "0")
                    private String account;
                 
                    public String getBank() {

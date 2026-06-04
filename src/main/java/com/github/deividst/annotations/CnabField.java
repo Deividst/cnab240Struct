@@ -16,4 +16,6 @@ public @interface CnabField {
     int end();
 
     FieldType type() default FieldType.ALPHANUMERIC;
+
+    String defaultValue();
 }
