@@ -40,13 +40,13 @@ import com.github.deividst.enums.FieldType;
 
 public class Demo {
 
-    @CnabField(start = 1, end = 3, type = FieldType.ALPHANUMERIC)
+    @CnabField(start = 1, end = 3, type = FieldType.ALPHANUMERIC, defaultValue = " ")
     private String banco;
 
-    @CnabField(start = 4, end = 7, type = FieldType.ALPHANUMERIC)
+    @CnabField(start = 4, end = 7, type = FieldType.ALPHANUMERIC, defaultValue = " ")
     private String agencia;
 
-    @CnabField(start = 8, end = 19, type = FieldType.NUMERIC)
+    @CnabField(start = 8, end = 19, type = FieldType.NUMERIC, "0")
     private String conta;
 
     // getters e setters
@@ -62,9 +62,9 @@ public class DemoCnabMapper {
 
     public static String write(Demo obj) {
         return new CnabLineBuilder()
-            .add("banco", 1, 3, obj.getBanco(), FieldType.ALPHANUMERIC)
-            .add("agencia", 4, 7, obj.getAgencia(), FieldType.ALPHANUMERIC)
-            .add("conta", 8, 19, obj.getConta(), FieldType.NUMERIC)
+            .add("banco", 1, 3, obj.getBanco(), FieldType.ALPHANUMERIC, " ")
+            .add("agencia", 4, 7, obj.getAgencia(), FieldType.ALPHANUMERIC, " ")
+            .add("conta", 8, 19, obj.getConta(), FieldType.NUMERIC, "0")
             .build();
     }
 
@@ -90,7 +90,8 @@ Define a posição e o comportamento de cada campo no layout CNAB.
 @CnabField(
     start = 1,
     end = 10,
-    type = FieldType.ALPHANUMERIC
+    type = FieldType.ALPHANUMERIC, 
+    defaultValue = " "
 )
 ```
 
@@ -99,7 +100,7 @@ Define a posição e o comportamento de cada campo no layout CNAB.
 * `start`: posição inicial (base 1)
 * `end`: posição final (base 1)
 * `type`: tipo do campo
-
+* `defaultValue`: valor padrão do campo
 ---
 
 ## 🔢 Tipos de campo
@@ -107,7 +108,7 @@ Define a posição e o comportamento de cada campo no layout CNAB.
 ### `ALPHANUMERIC`
 
 * Alinhado à esquerda
-* Preenchido com espaços ou caractere padrão
+* Preenchido com espaços à direita
 
 ### `NUMERIC`
 
