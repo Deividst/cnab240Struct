@@ -48,9 +48,9 @@ class CnabProcessorTest {
                                   public static Example read(String line) {
                                     Example obj = new Example();
                                 
-                                    obj.setBank(CnabLineReader.read(line, 0, 3));
-                                    obj.setAgency(CnabLineReader.read(line, 3, 7));
-                                    obj.setAccount(CnabLineReader.read(line, 7, 19));
+                                    obj.setBank(CnabLineReader.read(line, 1, 3));
+                                    obj.setAgency(CnabLineReader.read(line, 4, 7));
+                                    obj.setAccount(CnabLineReader.read(line, 8, 19));
                                 
                                     return obj;
                                   }

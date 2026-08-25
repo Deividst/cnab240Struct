@@ -71,9 +71,9 @@ public class DemoCnabMapper {
     public static Demo read(String line) {
         Demo obj = new Demo();
 
-        obj.setBanco(line.substring(0, 3));
-        obj.setAgencia(line.substring(3, 7));
-        obj.setConta(line.substring(7, 19));
+        obj.setBanco(line.substring(1, 3));
+        obj.setAgencia(line.substring(4, 7));
+        obj.setConta(line.substring(8, 19));
 
         return obj;
     }

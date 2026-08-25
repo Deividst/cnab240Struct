@@ -240,11 +240,6 @@ public class CnabProcessor extends AbstractProcessor {
      *     <li>Gera a chamada ao setter correspondente no objeto</li>
      * </ul>
      *
-     * <p>Importante:</p>
-     * <ul>
-     *     <li>O índice inicial é ajustado de base 1 (CNAB) para base 0 (Java)</li>
-     *     <li>O índice final é mantido, pois o {@code substring} é exclusivo</li>
-     * </ul>
      *
      * <p>Exemplo gerado:</p>
      * <pre>
@@ -265,9 +260,7 @@ public class CnabProcessor extends AbstractProcessor {
         String fieldName = field.getSimpleName().toString();
         String setter = buildSetter(fieldName);
 
-        int beginIndex = start - 1;
-
-        String valueExtraction = "CnabLineReader.read("+ "line, " + beginIndex + ", " + end + ")";
+        String valueExtraction = "CnabLineReader.read("+ "line, " + start + ", " + end + ")";
 
         writer.write(
                 "    obj." + setter + "(" + valueExtraction + ");\n"
